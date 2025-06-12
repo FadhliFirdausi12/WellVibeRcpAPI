@@ -13,7 +13,7 @@ app.use("/public", express.static(path.join(__dirname, "../public")));
 app.use(router);
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to the Kelolaproduk API!")
+    res.send("Welcome to the Recipe API!")
 }) 
 
 app.listen(PORT, () => {
