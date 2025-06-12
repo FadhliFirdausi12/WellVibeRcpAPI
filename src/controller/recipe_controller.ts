@@ -64,7 +64,7 @@ const RecipeController = {
 
         const recipe = await Recipe.create
         ({
-            ...req.body.name,
+            ...req.body,
             imageUrl:imageUrl,
         })
         return res.status(200).json({
