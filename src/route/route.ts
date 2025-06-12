@@ -1,5 +1,6 @@
 //@ts-nocheck
 import express from 'express'
+import upload from '../middleware/upload';
 import RecipeController from '../controller/recipe_controller';
 
 const router = express.Router()
