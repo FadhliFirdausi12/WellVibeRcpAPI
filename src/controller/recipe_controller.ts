@@ -67,7 +67,7 @@ const RecipeController = {
             ...req.body.name,
             imageUrl:imageUrl,
         })
-        return res.status(201).json({
+        return res.status(200).json({
             status:201,
             message: "Recipe created successfully",
             recipe: recipe
