@@ -49,37 +49,85 @@ const RecipeController = {
             })
     }
   },
-  store: async (req: Request, res: Response) =>{
-    try{
-        if(!req.file){
-            return res.status(400).json({
-                status:400,
-                message: "Please upload a image"
-                })
-        }
-
-        //"https://blablaba.com/public/images/dfdrgebntrewsazxs.jpg";
-        const baseUrl = `${req.protocol}://${req.get("host")}`;
-        const imageUrl = `${baseUrl}/public/images/${req.file.filename}`;
-
-        const recipe = await Recipe.create
-        ({
-            ...req.body,
-            imageUrl:imageUrl,
-        })
-        return res.status(200).json({
-            status:200,
-            message: "Recipe created successfully",
-            recipe: recipe
-            })
-            
-    }catch(error:any){
-        return res.status(500).json({
-            status:500,
-            message: `Error creating recipe:${error.message}`
-            })
+  store: async (req: Request, res: Response) => {
+    try {
+      // Cek apakah file gambar dikirim
+      if (!req.file) {
+        return res.status(400).json({
+          status: 400,
+          message: "Please upload an image"
+        });
+      }
+  
+      // Ambil URL gambar
+      const baseUrl = `${req.protocol}://${req.get("host")}`;
+      const imageUrl = `${baseUrl}/public/images/${req.file.filename}`;
+  
+      // Ambil data dari req.body
+      const { userId, name, ingridients, steps } = req.body;
+  
+      // Validasi data minimal
+      if (!userId || !name || !ingridients || !steps) {
+        return res.status(400).json({
+          status: 400,
+          message: "All fields (userId, name, ingridients, steps) are required."
+        });
+      }
+  
+      // Simpan ke database
+      const recipe = await Recipe.create({
+        userId,
+        name,
+        ingridients,
+        steps,
+        imageUrl
+      });
+  
+      return res.status(201).json({
+        status: 201,
+        message: "Recipe created successfully",
+        recipe: recipe
+      });
+  
+    } catch (error: any) {
+      return res.status(500).json({
+        status: 500,
+        message: `Error creating recipe: ${error.message}`
+      });
     }
   },
+  
+  // store: async (req: Request, res: Response) =>{
+  //   try{
+  //       if(!req.file){
+  //           return res.status(400).json({
+  //               status:400,
+  //               message: "Please upload a image"
+  //               })
+  //       }
+
+  //       //"https://blablaba.com/public/images/dfdrgebntrewsazxs.jpg";
+  //       const baseUrl = `${req.protocol}://${req.get("host")}`;
+  //       const imageUrl = `${baseUrl}/public/images/${req.file.filename}`;
+
+  //       const recipe = await Recipe.create
+  //       ({
+  //           ...req.body,
+  //           imageUrl:imageUrl,
+  //       })
+  //       return res.status(200).json({
+  //           status:200,
+  //           message: "Recipe created successfully",
+  //           recipe: recipe
+  //           })
+            
+  //   }catch(error:any){
+  //       return res.status(500).json({
+  //           status:500,
+  //           message: `Error creating recipe:${error.message}`
+  //           })
+  //   }
+  // },
   update: async (req:Request, res:Response)=>{
     try{
         //"https://blablaba.com/recipes/1";
