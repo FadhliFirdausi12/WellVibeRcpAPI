@@ -10,6 +10,6 @@ router.get("/recipes", RecipeController.index)
 router.get("/recipe/:id", RecipeController.show)
 router.post("/recipe", upload.single("image"), RecipeController.store);
 router.put("/recipe/:id", upload.single("image"), RecipeController.update)
-router.delete("/recipe/:id", RecipeController.destory);
+router.delete("/recipe/:id", RecipeController.destroy);
 
 export default router
