@@ -6,9 +6,9 @@ const router = express.Router()
 router.get(".recipes", )
 
 router.get("/recipes", RecipeController.index)
-router.get("/recipe/:id", RecipeController.show)
-router.post("/recipe", upload.single("image"), RecipeController.store);
-router.put("/recipe/:id", upload.single("image"), RecipeController.update)
-router.delete("/recipe/:id", RecipeController.destory);
+router.get("/recipes/:id", RecipeController.show)
+router.post("/recipes", upload.single("image"), RecipeController.store);
+router.put("/recipes/:id", upload.single("image"), RecipeController.update)
+router.delete("/recipes/:id", RecipeController.destory);
 
 export default router
