@@ -37,11 +37,11 @@ Recipe.init(
     steps: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    }
   },
   {
     sequelize:database,
-    tableName: "recipes",
+    tableName: "recipes"
   }
 ).sync()
 .then(()=>console.log("Recipe model synced succesfully. "))
