@@ -10,7 +10,7 @@ const RecipeController = {
         where: {
           userId: userId // example@example.com
         }
-      });
+      })
 
       return res.status(200).json({
         status: 200,
@@ -100,6 +100,7 @@ const RecipeController = {
         }
 
         await recipe.update(req.body)
+        
         return res.status(200).json({
             status:200,
             message: "Recipe updated successfully",
